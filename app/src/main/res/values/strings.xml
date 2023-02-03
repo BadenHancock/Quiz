@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="question_one">Every major is play at a different venue every year?</string>
+    <string name="question_two">Tiger Woods has the most wins on the PGA tour?</string>
+    <string name="question_three">Tiger Woods won the 2008 U.S. Open on a broken leg.</string>
+    <string name="question_four">Rory Mcilroy broke par for the first time a 12.</string>
+    <string name="question_five">The U.S. Open was won by 15 shots before.</string>
+    <string name="True">correct</string>
+    <string name="False">incorrect</string>
+    <string name="next">next</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
