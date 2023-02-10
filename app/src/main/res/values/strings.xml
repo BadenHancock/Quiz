@@ -8,7 +8,13 @@
     <string name="True">correct</string>
     <string name="False">incorrect</string>
     <string name="next">next</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="press_the_button_it_s_so_easy">Press the button. It\'s so easy.</string>
+    <string name="show_answer">show answer</string>
+    <string name="you_won">You won</string>
+    <string name="not_true">False</string>
+    <string name="not_false">True</string>
+    <string name="cheat">Cheat</string>
+    <string name="about">about</string>
 
 </resources>

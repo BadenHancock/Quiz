@@ -5,10 +5,13 @@
       <map>
         <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz/app/src/main/res/layout-land/activity_main.xml" value="0.25875" />
         <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/drawable/ic_baseline_pause_circle_filled_24.xml" value="0.2445" />
         <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/fragment_cheat.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/fragment_about.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/fragment_cheat.xml" value="0.1" />
         <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/fragment_game_won.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/fragment_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/layout/fragment_main.xml" value="0.1" />
+        <entry key="..\:/Users/hancockb24/AndroidStudioProjects/Quiz_Fragments/app/src/main/res/menu/options_menu.xml" value="0.271875" />
       </map>
     </option>
   </component>

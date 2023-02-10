@@ -20,11 +20,8 @@
         android:label="fragment_cheat"
         tools:layout="@layout/fragment_cheat" >
         <argument
-            android:name="QuestionArg"
-            app:argType="string" />
-        <argument
-            android:name="AnswerArg"
-            app:argType="string" />
+            android:name="answerArg"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment2"
@@ -37,4 +34,8 @@
             android:id="@+id/action_mainFragment2_to_gameWonFragment"
             app:destination="@id/gameWonFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.quiz.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>
