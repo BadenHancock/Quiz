@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    data class Question(val question : Int,val isTrue : Boolean)
+
     lateinit var question : List<Question>
     var wrong = 0
     var correct = 0

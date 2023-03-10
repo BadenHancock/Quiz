@@ -24,13 +24,14 @@ class GameWonFragment : Fragment() {
         setHasOptionsMenu(true)
         val args = GameWonFragmentArgs.fromBundle(requireArguments())
         mediaPlayer = MediaPlayer.create(context,R.raw.epic)
+        mediaPlayer.isLooping = true
         mediaPlayer.start()
         binding.imageButton.setImageResource(R.drawable.pause)
         val wrong = args.incorrectArg
         binding.textView2.text = "You had " + wrong + " wrong answers"
         binding.imageButton.setOnClickListener() {
             if(mediaPlayer.isPlaying) {
-                mediaPlayer.stop()
+                mediaPlayer.pause()
                 binding.imageButton.setImageResource((R.drawable.play))
             }
             else{
