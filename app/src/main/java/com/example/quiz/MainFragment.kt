@@ -37,12 +37,7 @@ class MainFragment : Fragment() {
             cheat = bundle.getBoolean("REPLY_KEY")
         }
 
-        val questions = listOf<Question>(
-            Question(R.string.question_one, false),
-            Question(R.string.question_two, false),
-            Question(R.string.question_three, true),
-            Question(R.string.question_four, true),
-            Question(R.string.question_five, true)
+
         )
 
         binding.question.text = getString(questions.get(arr).question)
