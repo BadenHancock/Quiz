@@ -6,10 +6,12 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.quiz.databinding.FragmentMainBinding
 import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.activityViewModels
 
 //
 const val KEY_QUESTION_NUM = "questionNum"
@@ -18,19 +20,17 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var question : List<Question>
-    var wrong = 0
-    var correct = 0
-    var arr = 0
+
+    private  val viewModel:QuizViewModel by activityViewModels()
     lateinit var mediaPlayer : MediaPlayer
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
+        viewModel.listIndex.observe(viewLifecycleOwner) {
+            binding.question.text = viewModel.currentQuestionText
+        }
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val rootView = binding.root
-        if(savedInstanceState != null) {
-            arr = savedInstanceState.getInt(KEY_QUESTION_NUM)
-        }
         setHasOptionsMenu(true)
         var cheat = false
         setFragmentResultListener("REQUESTING_REPLY_KEY") { requestKey: String, bundle: Bundle ->
@@ -38,51 +38,20 @@ class MainFragment : Fragment() {
         }
 
 
-        )
 
-        binding.question.text = getString(questions.get(arr).question)
-        fun checkAnswer(userAnswer : Boolean) {
-            if(userAnswer == questions.get(arr).isTrue) {
-                Toast.makeText(activity, R.string.True, Toast.LENGTH_SHORT).show()
-                mediaPlayer = MediaPlayer.create(context, R.raw.yes)
-                mediaPlayer.start()
-                if(!cheat) {
-                    correct++
-                }
-                if(correct == 3 ) {
-                    val action = MainFragmentDirections.actionMainFragment2ToGameWonFragment(wrong)
-                    rootView.findNavController().navigate(action)
-                }
+        binding.question.text = getString(viewModel.questions.get(viewModel.listIndex.toString().toInt()).question)
 
-                if(cheat) {
-                    Snackbar.make(binding.root, "Cheating isn't right", Snackbar.LENGTH_SHORT).show()
-                    cheat=false
-                }
-
-            }
-            else  {
-                Toast.makeText(activity, R.string.False, Toast.LENGTH_SHORT).show()
-                mediaPlayer = MediaPlayer.create(context, R.raw.no)
-                mediaPlayer.start()
-                wrong++
-            }
-        }
         binding.trueButton.setOnClickListener() {view ->
-            checkAnswer(true)
+            viewModel.checkAnswer(true)
         }
         binding.falseButton.setOnClickListener() {view ->
-            checkAnswer(false)
+            viewModel.checkAnswer(false)
         }
         binding.nextButton.setOnClickListener() {view ->
-            if(arr == questions.size-1) {
-                arr=0
-            }
-            else
-                arr++
-            binding.question.text = getString(questions.get(arr).question)
+
         }
         binding.cheatButton.setOnClickListener() {
-            val action = MainFragmentDirections.actionMainFragment2ToCheatFragment2(questions.get(arr).isTrue)
+            val action = MainFragmentDirections.actionMainFragment2ToCheatFragment2(viewModel.questions.get(viewModel.listIndex.toString().toInt()).isTrue)
             rootView.findNavController().navigate(action)
         }
         return rootView
@@ -97,12 +66,31 @@ class MainFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
+    fun checkAnswer(userAnswer : Boolean) {
+        if(viewModel.checkAnswer(userAnswer)) {
+
+            if(!viewModel.questions.get(viewModel.listIndex.value?:0).cheated) {
+                Toast.makeText(activity, R.string.True, Toast.LENGTH_SHORT).show()
+                mediaPlayer = MediaPlayer.create(context, R.raw.yes)
+                mediaPlayer.start()
+            }
+            else {
+                Snackbar.make(binding.root, "Cheating isn't right", Snackbar.LENGTH_SHORT).show()
+            }
+
+        }
+        else  {
+            Toast.makeText(activity, R.string.False, Toast.LENGTH_SHORT).show()
+            mediaPlayer = MediaPlayer.create(context, R.raw.no)
+            mediaPlayer.start()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    override fun onSaveInstanceState(savedInstanceState: Bundle) {
-        super.onSaveInstanceState(savedInstanceState)
-        savedInstanceState.putInt(KEY_QUESTION_NUM, arr)
-    }
+//    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+//        super.onSaveInstanceState(savedInstanceState)
+//        savedInstanceState.putInt(KEY_QUESTION_NUM, arr)
+//    }
 }

@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -15,6 +16,7 @@ import com.example.quiz.databinding.FragmentGameWonBinding
 class CheatFragment : Fragment() {
     private var _binding: FragmentCheatBinding? = null
     private val binding get() = _binding!!
+    private  val viewModel:QuizViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,8 +24,7 @@ class CheatFragment : Fragment() {
         _binding = FragmentCheatBinding.inflate(inflater, container, false)
         val rootView = binding.root
         setHasOptionsMenu(true)
-        val args = CheatFragmentArgs.fromBundle((requireArguments()))
-        val answer = args.answerArg
+        val answer = viewModel.currentQuestionAnswer.toString()
         var cheat = false
         binding.answerText.text = answer.toString()
         binding.showAnswerButton.setOnClickListener() {
