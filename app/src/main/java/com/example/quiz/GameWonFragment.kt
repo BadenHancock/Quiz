@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.quiz.databinding.FragmentGameWonBinding
@@ -13,7 +14,8 @@ import kotlin.math.ceil
 class GameWonFragment : Fragment() {
     private var _binding: FragmentGameWonBinding? = null
     private val binding get() = _binding!!
-    lateinit var mediaPlayer: MediaPlayer
+//    lateinit var mediaPlayer: MediaPlayer
+    private  val viewModel:QuizViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,31 +24,30 @@ class GameWonFragment : Fragment() {
         _binding = FragmentGameWonBinding.inflate(inflater, container, false)
         val rootView = binding.root
         setHasOptionsMenu(true)
-        val args = GameWonFragmentArgs.fromBundle(requireArguments())
-        mediaPlayer = MediaPlayer.create(context,R.raw.epic)
-        mediaPlayer.isLooping = true
-        mediaPlayer.start()
+//        mediaPlayer = MediaPlayer.create(context,R.raw.epic)
+//        mediaPlayer.isLooping = true
+//        mediaPlayer.start()
         binding.imageButton.setImageResource(R.drawable.pause)
-        val wrong = args.incorrectArg
+        val wrong = viewModel.incorrectAnswers.toString().toInt()
         binding.textView2.text = "You had " + wrong + " wrong answers"
-        binding.imageButton.setOnClickListener() {
-            if(mediaPlayer.isPlaying) {
-                mediaPlayer.pause()
-                binding.imageButton.setImageResource((R.drawable.play))
-            }
-            else{
-                mediaPlayer.start()
-                binding.imageButton.setImageResource(R.drawable.pause)
-            }
-        }
-        binding.rewind.setOnClickListener() {
-            val current  = mediaPlayer.currentPosition
-            mediaPlayer.seekTo(current-10000)
-        }
-        binding.fastforward.setOnClickListener() {
-            val current  = mediaPlayer.currentPosition
-            mediaPlayer.seekTo(current+10000)
-        }
+//        binding.imageButton.setOnClickListener() {
+//            if(mediaPlayer.isPlaying) {
+//                mediaPlayer.pause()
+//                binding.imageButton.setImageResource((R.drawable.play))
+//            }
+//            else{
+////                mediaPlayer.start()
+////                binding.imageButton.setImageResource(R.drawable.pause)
+//            }
+//        }
+//        binding.rewind.setOnClickListener() {
+////            val current  = mediaPlayer.currentPosition
+////            mediaPlayer.seekTo(current-10000)
+//        }
+//        binding.fastforward.setOnClickListener() {
+//            val current  = mediaPlayer.currentPosition
+////            mediaPlayer.seekTo(current+10000)
+//        }
         return rootView
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -61,6 +62,6 @@ class GameWonFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        mediaPlayer.release()
+//        mediaPlayer.release()
     }
 }

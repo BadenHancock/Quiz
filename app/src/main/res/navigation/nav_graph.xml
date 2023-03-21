@@ -14,11 +14,7 @@
         android:id="@+id/cheatFragment2"
         android:name="com.example.quiz.CheatFragment"
         android:label="fragment_cheat"
-        tools:layout="@layout/fragment_cheat" >
-        <argument
-            android:name="answerArg"
-            app:argType="boolean" />
-    </fragment>
+        tools:layout="@layout/fragment_cheat" />
     <fragment
         android:id="@+id/mainFragment2"
         android:name="com.example.quiz.MainFragment"
