@@ -29,11 +29,9 @@ class CheatFragment : Fragment() {
         binding.answerText.text = answer.toString()
         binding.showAnswerButton.setOnClickListener() {
             binding.answerText.visibility = VISIBLE
-            cheat = true
-            setFragmentResult("REQUESTING_REPLY_KEY", bundleOf("REPLY_KEY" to true))
+            viewModel.setCheatedStatusForCurrentQuestion(true)
         }
-        cheat = false
-        setFragmentResult("REQUESTING_REPLY_KEY", bundleOf("REPLY_KEY" to false))
+        viewModel.setCheatedStatusForCurrentQuestion(false)
         return rootView
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

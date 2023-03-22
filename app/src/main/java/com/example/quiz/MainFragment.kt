@@ -22,7 +22,7 @@ class MainFragment : Fragment() {
 
 
     private  val viewModel:QuizViewModel by activityViewModels()
-    lateinit var mediaPlayer : MediaPlayer
+//    lateinit var mediaPlayer : MediaPlayer
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?
@@ -38,7 +38,10 @@ class MainFragment : Fragment() {
         }
 
         viewModel.gameWon.observe(viewLifecycleOwner) {
-
+            if(viewModel.gameWon.value?:0 == true) {
+                val action = MainFragmentDirections.actionMainFragment2ToGameWonFragment()
+                rootView.findNavController().navigate(action)
+            }
         }
 
         binding.trueButton.setOnClickListener() {
@@ -66,12 +69,12 @@ class MainFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
-    fun checkAnswer(userAnswer : Boolean) {
+    private fun checkAnswer(userAnswer : Boolean) {
         if(viewModel.checkAnswer(userAnswer)) {
             if(!viewModel.currentQuestionCheatStatus) {
                 Toast.makeText(activity, R.string.True, Toast.LENGTH_SHORT).show()
-                mediaPlayer = MediaPlayer.create(context, R.raw.yes)
-                mediaPlayer.start()
+//                mediaPlayer = MediaPlayer.create(context, R.raw.yes)
+//                mediaPlayer.start()
             }
             else {
                 Snackbar.make(binding.root, "Cheating isn't right", Snackbar.LENGTH_SHORT).show()
@@ -79,8 +82,8 @@ class MainFragment : Fragment() {
         }
         else  {
             Toast.makeText(activity, R.string.False, Toast.LENGTH_SHORT).show()
-            mediaPlayer = MediaPlayer.create(context, R.raw.no)
-            mediaPlayer.start()
+//            mediaPlayer = MediaPlayer.create(context, R.raw.no)
+//            mediaPlayer.start()
         }
     }
     override fun onDestroyView() {

@@ -44,7 +44,7 @@ class QuizViewModel : ViewModel() {
         questions.get(_listIndex.value ?: 0).cheated = a
     }
 
-    fun checkIfGameWon() {
+    fun checkIfGameWon(){
         _gameWon.value = _correctAnswers == 3
     }
 
@@ -53,13 +53,14 @@ class QuizViewModel : ViewModel() {
             if (!currentQuestionCheatStatus) {
                 _correctAnswers++
                 checkIfGameWon()
+                return true
             }
-            return true
 
         } else {
             _incorrectAnswers++
             return false
         }
+        return true
     }
 
     fun setNextQuestion() {
